@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPHEMERA | Estado del Servicio</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <style>
+        /* --- ESTILOS AISLADOS PARA ESTADO DEL SERVICIO --- */
+        .status-container { display: flex; flex-direction: column; gap: 1.5rem; max-width: 1000px; }
+        
+        .card-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-primary, rgba(255,255,255,0.05)); padding-bottom: 0.5rem; }
+        .card-header-flex h3 { font-size: 1.125rem; font-weight: 500; }
+    </style>
+</head>
+<body class="dark-theme">
+    <div class="app-container">
+        <aside class="sidebar">
+            <a href="index.html" style="display: flex; align-items: center; gap: 10px; padding: 1.5rem; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); cursor: pointer; transition: opacity 0.2s ease;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+                <img src="logo.png" alt="Logo" style="width: 75px !important; min-width: 75px !important; height: auto !important; object-fit: contain; flex-shrink: 0; display: block;">
+                <span style="color: #3B82F6; font-size: 1.35rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; line-height: 1; margin-top: 2px;">EPHEMERA</span>
+            </a>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">Panel</a>
+                <a href="huella.html" class="nav-item">Huella Digital</a>
+                <a href="incidencias.html" class="nav-item">Incidencias</a>
+                <a href="evidencia.html" class="nav-item">Evidencia</a>
+                <a href="historial.html" class="nav-item">Historial</a>
+                <a href="estado.html" class="nav-item">Estado del Servicio</a>
+                <a href="config.html" class="nav-item">Configuración</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div style="max-width: 1000px; margin: 0 auto; padding: 2rem;">
+                <h2 style="margin-bottom: 2rem; font-size: 1.8rem;">Estado del Servicio</h2>
+
+                <div id="main-status-card" class="card" style="display: flex; align-items: center; gap: 1.5rem; border-left: 4px solid #10B981; margin-bottom: 2rem; padding: 2rem; background: #111827;">
+                    <div id="status-icon" style="background: rgba(16, 185, 129, 0.1); padding: 1.2rem; border-radius: 50%; color: #10B981; display: flex; align-items: center; justify-content: center;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
+                    <div>
+                        <h3 id="status-title" style="margin: 0 0 5px 0; color: #10B981; font-size: 1.6rem;">Activo</h3>
+                        <p id="status-desc" style="margin: 0; color: #9CA3AF; font-size: 1rem;">El proceso de protección está activo y en operación.</p>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                    <div class="card" style="padding: 1.5rem; background: #111827;">
+                        <h3 style="margin-top: 0; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1rem; font-size: 1.1rem;">Ciclo de Ejecución</h3>
+                        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1.2rem;">
+                            <li style="display: flex; justify-content: space-between; font-size: 0.95rem;">
+                                <span style="color: #9CA3AF;">1. Definición de huella</span> 
+                                <span class="step-status" style="color: #10B981; font-weight: 600;">Completado</span>
+                            </li>
+                            <li style="display: flex; justify-content: space-between; font-size: 0.95rem;">
+                                <span style="color: #9CA3AF;">2. Búsqueda y correlación</span> 
+                                <span class="step-status" style="color: #3B82F6; font-weight: 600;">En espera</span>
+                            </li>
+                            <li style="display: flex; justify-content: space-between; font-size: 0.95rem;">
+                                <span style="color: #9CA3AF;">3. Acciones ejecutadas</span> 
+                                <span class="step-status" style="color: #3B82F6; font-weight: 600;">En espera</span>
+                            </li>
+                            <li style="display: flex; justify-content: space-between; font-size: 0.95rem;">
+                                <span style="color: #9CA3AF;">4. Monitorización</span> 
+                                <span class="step-status" style="color: #10B981; font-weight: 600;">Activo</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="padding: 1.5rem; background: #111827; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <h3 style="margin-top: 0; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1rem; font-size: 1.1rem;">Resumen de Operación</h3>
+                            <p style="margin: 0 0 12px 0; color: #D1D5DB; font-size: 0.95rem;"><strong>Última actualización:</strong> <br><span id="last-update" style="color: #9CA3AF;"></span></p>
+                            <p style="margin: 0; color: #D1D5DB; font-size: 0.95rem;"><strong>Próximo escaneo:</strong> <br><span id="next-scan" style="color: #9CA3AF;">Automático en 24h</span></p>
+                        </div>
+                        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                            <button id="btn-toggle-service" style="flex: 1; background: transparent; border: 1px solid #374151; color: white; padding: 0.8rem; border-radius: 6px; cursor: pointer; transition: 0.3s;" onclick="toggleService()">Pausar Servicio</button>
+                            <button id="btn-run-scan" style="flex: 1; background: #2563EB; border: none; color: white; padding: 0.8rem; border-radius: 6px; cursor: pointer; font-weight: 500; transition: 0.3s;" onclick="runManualScan()">Re-ejecutar análisis</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                let isServiceActive = true;
+                let isScanning = false;
+
+                // Inicializar fecha al cargar
+                document.addEventListener('DOMContentLoaded', () => {
+                    updateDateStamp();
+                });
+
+                function updateDateStamp() {
+                    const now = new Date();
+                    document.getElementById('last-update').innerText = now.toLocaleString('es-ES', { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                }
+
+                function toggleService() {
+                    if (isScanning) return; // Bloquear si está analizando
+                    
+                    isServiceActive = !isServiceActive;
+                    const statusTitle = document.getElementById('status-title');
+                    const statusDesc = document.getElementById('status-desc');
+                    const statusIcon = document.getElementById('status-icon');
+                    const btnToggle = document.getElementById('btn-toggle-service');
+                    const mainCard = document.getElementById('main-status-card');
+                    const steps = document.querySelectorAll('.step-status');
+
+                    if (isServiceActive) {
+                        statusTitle.innerText = "Activo";
+                        statusTitle.style.color = "#10B981";
+                        statusDesc.innerText = "El proceso de protección está activo y en operación.";
+                        statusIcon.style.color = "#10B981";
+                        statusIcon.style.background = "rgba(16, 185, 129, 0.1)";
+                        statusIcon.innerHTML = '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>';
+                        mainCard.style.borderLeftColor = "#10B981";
+                        btnToggle.innerText = "Pausar Servicio";
+                        document.getElementById('btn-run-scan').style.opacity = "1";
+                        document.getElementById('btn-run-scan').style.cursor = "pointer";
+                        steps[3].innerText = "Activo";
+                        steps[3].style.color = "#10B981";
+                    } else {
+                        statusTitle.innerText = "Pausado";
+                        statusTitle.style.color = "#F59E0B";
+                        statusDesc.innerText = "La monitorización ha sido detenida. Tu huella no se está actualizando.";
+                        statusIcon.style.color = "#F59E0B";
+                        statusIcon.style.background = "rgba(245, 158, 11, 0.1)";
+                        statusIcon.innerHTML = '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>';
+                        mainCard.style.borderLeftColor = "#F59E0B";
+                        btnToggle.innerText = "Reanudar Servicio";
+                        document.getElementById('btn-run-scan').style.opacity = "0.5";
+                        document.getElementById('btn-run-scan').style.cursor = "not-allowed";
+                        steps[3].innerText = "Pausado";
+                        steps[3].style.color = "#F59E0B";
+                    }
+                }
+
+                async function runManualScan() {
+                    if (!isServiceActive || isScanning) return;
+                    isScanning = true;
+
+                    const btnScan = document.getElementById('btn-run-scan');
+                    const statusTitle = document.getElementById('status-title');
+                    const statusDesc = document.getElementById('status-desc');
+                    const statusIcon = document.getElementById('status-icon');
+                    const mainCard = document.getElementById('main-status-card');
+                    const steps = document.querySelectorAll('.step-status');
+
+                    // FASE 1: Preparación visual
+                    btnScan.innerText = "Analizando red...";
+                    btnScan.style.opacity = "0.7";
+                    btnScan.style.cursor = "wait";
+                    
+                    statusTitle.innerText = "Escaneo en curso";
+                    statusTitle.style.color = "#3B82F6";
+                    statusDesc.innerText = "Sincronizando con APIs externas e indexando nuevos resultados.";
+                    statusIcon.style.color = "#3B82F6";
+                    statusIcon.style.background = "rgba(59, 130, 246, 0.1)";
+                    statusIcon.innerHTML = '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 2s linear infinite;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21L21.5 8"></path></svg>';
+                    mainCard.style.borderLeftColor = "#3B82F6";
+
+                    // FASE 2: Secuencia asíncrona de simulación
+                    steps[0].innerText = "Verificando hash..."; steps[0].style.color = "#3B82F6";
+                    await new Promise(r => setTimeout(r, 1800));
+                    steps[0].innerText = "Completado"; steps[0].style.color = "#10B981";
+                    
+                    steps[1].innerText = "Extrayendo datos..."; steps[1].style.color = "#3B82F6";
+                    await new Promise(r => setTimeout(r, 2200));
+                    steps[1].innerText = "Completado"; steps[1].style.color = "#10B981";
+                    
+                    steps[2].innerText = "Clasificando riesgos..."; steps[2].style.color = "#3B82F6";
+                    await new Promise(r => setTimeout(r, 1500));
+                    steps[2].innerText = "Completado"; steps[2].style.color = "#10B981";
+
+                    // FASE 3: Restauración del servicio
+                    updateDateStamp();
+                    
+                    statusTitle.innerText = "Activo";
+                    statusTitle.style.color = "#10B981";
+                    statusDesc.innerText = "El proceso de protección está activo y en operación.";
+                    statusIcon.style.color = "#10B981";
+                    statusIcon.style.background = "rgba(16, 185, 129, 0.1)";
+                    statusIcon.innerHTML = '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>';
+                    mainCard.style.borderLeftColor = "#10B981";
+
+                    btnScan.innerText = "Re-ejecutar análisis";
+                    btnScan.style.opacity = "1";
+                    btnScan.style.cursor = "pointer";
+                    
+                    // Resetear los pasos intermedios sutilmente después de unos segundos
+                    setTimeout(() => {
+                        steps[1].innerText = "En espera"; steps[1].style.color = "#3B82F6";
+                        steps[2].innerText = "En espera"; steps[2].style.color = "#3B82F6";
+                    }, 4000);
+
+                    isScanning = false;
+                }
+            </script>
+
+            <style>
+                @keyframes spin { 100% { transform: rotate(360deg); } }
+            </style>
+        </main>
+    </div>
+</body>
+</html>

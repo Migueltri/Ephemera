@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPHEMERA | Evidencia Forense</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body class="dark-theme">
+    <div class="app-container">
+        <aside class="sidebar">
+            <a href="index.html" style="display: flex; align-items: center; gap: 10px; padding: 1.5rem; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); cursor: pointer; transition: opacity 0.2s ease;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+                <img src="logo.png" alt="Logo" style="width: 75px !important; min-width: 75px !important; height: auto !important; object-fit: contain; flex-shrink: 0; display: block;">
+                <span style="color: #3B82F6; font-size: 1.35rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; line-height: 1; margin-top: 2px;">EPHEMERA</span>
+            </a>
+            
+            <nav class="sidebar-nav">
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">Panel</a>
+                <a href="huella.html" class="nav-item">Huella Digital</a>
+                <a href="incidencias.html" class="nav-item">Incidencias</a>
+                <a href="evidencia.html" class="nav-item">Evidencia</a>
+                <a href="historial.html" class="nav-item">Historial</a>
+                <a href="estado.html" class="nav-item">Estado del Servicio</a>
+                <a href="config.html" class="nav-item">Configuración</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <h2>Evidencia Registrada</h2>
+                <button class="btn btn-primary">Registrar Evidencia Manual</button>
+            </header>
+            
+            <div class="view-container">
+                <div id="evidencias-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem;"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+<script>
+        function toggleMenu() {
+            const sidebar = document.querySelector('aside');
+            const overlay = document.getElementById('menu-overlay');
+            if(sidebar) sidebar.classList.toggle('menu-abierto');
+            if(overlay) overlay.classList.toggle('menu-abierto');
+        }
+    </script>
+</body>
+</html>
